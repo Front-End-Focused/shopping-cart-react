@@ -3,7 +3,7 @@ import CartItemsList from "./components/Cart/CartItemsList";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar";
 import SectionHeading from "./components/SectionHeading";
-import data from "./components/data";
+import { AppContext } from ".";
 
 function App() {
   return (
@@ -13,9 +13,13 @@ function App() {
         <div className="row">
           <section className="col-8">
             <SectionHeading totalItems="3" />
-            <CartItemsList items={data.items} />
+            <AppContext.Consumer>
+              {(context) => <CartItemsList items={context.state.items} />}
+            </AppContext.Consumer>
           </section>
-          <Sidebar items={data.items} />
+          <AppContext.Consumer>
+            {(context) => <Sidebar items={context.state.items} />}
+          </AppContext.Consumer>
         </div>
       </div>
     </div>
